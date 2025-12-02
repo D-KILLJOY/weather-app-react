@@ -1,0 +1,69 @@
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+
+@font-face {
+    font-family: "BricolageGrotesque";
+    src: url("assets/fonts/Bricolage_Grotesque/BricolageGrotesque-VariableFont_opsz,wdth,wght.ttf")
+        format("truetype");
+    font-weight: 100 900;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: "DMSansItalic";
+    src: url("assets/fonts/DM_Sans/DMSans-Italic-VariableFont_opsz,wght.ttf")
+        format("truetype");
+    font-weight: 100 900;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: "DMsans";
+    src: url("assets/fonts/DM_Sans/DMSans-VariableFont_opsz,wght.ttf")
+        format("truetype");
+    font-weight: 100 900;
+    font-style: normal;
+}
+
+:root {
+    font-size: 62.5%;
+    --BricolageGrotesque: "BricolageGrotesque", sans-serif;
+    --DMSansItalic: "DMSansItalic", sans-serif;
+    --DMsans: "DMsans", sans-serif;
+
+    --Neutral-900: hsl(243, 96%, 9%);
+    --Neutral-800: hsl(243, 27%, 20%);
+    --Neutral-700: hsl(243, 23%, 24%);
+    --Neutral-600: hsl(243, 23%, 30%);
+    --Neutral-300: hsl(240, 6%, 70%);
+    --Neutral-200: hsl(250, 6%, 84%);
+    --Neutral-0: hsl(0, 0%, 100%);
+    --Orange-500: hsl(28, 100%, 52%);
+    --Blue-500: hsl(233, 67%, 56%);
+    --Blue-700: hsl(248, 70%, 36%);
+}
+
+body {
+    background-color: var(--Neutral-900);
+    padding: 1.6rem 1.6rem 4.8rem;
+    color: var(--Neutral-0);
+}
+
+li {
+    list-style-type: none;
+}
+
+a {
+    text-decoration: none;
+}
+
+img {
+    display: block;
+}
+
+button {
+    cursor: pointer;
+}

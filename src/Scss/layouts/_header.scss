@@ -1,0 +1,129 @@
+.main__header {
+    display: flex;
+    width: 100%;
+}
+
+.main__nav {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    position: relative;
+}
+
+.main__logo {
+    width: 13.8rem;
+}
+
+.unit__btn {
+    width: 8.9rem;
+    height: 3.3rem;
+    background-color: var(--Neutral-800);
+    padding: 0.8rem 1rem;
+    color: var(--Neutral-0);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 0.6rem;
+    border: 1px solid #000;
+}
+
+.unit__btn:hover {
+    background-color: var(--Neutral-700);
+}
+
+.unit__btn--active,
+.unit__btn:focus {
+    outline: none;
+    border: 2px solid var(--Neutral-0);
+}
+
+.unit__icon {
+    width: 1.4rem;
+    height: 1.4rem;
+}
+
+.unit__btn__text {
+    font-family: var(--DMsans);
+    font-size: 1.4rem;
+}
+
+.icon__dropdown {
+    width: 0.9rem;
+    height: 1.4rem;
+}
+
+.nav__dropdown {
+    width: 21.4rem;
+    position: absolute;
+    right: 0;
+    top: 4.8rem;
+    border-radius: 1.2rem;
+    padding: 0.6rem 0.8rem;
+    border: 1px solid var(--Neutral-600);
+    background-color: var(--Neutral-800);
+    display: none;
+    flex-direction: column;
+    gap: 0.4rem;
+    font-family: var(--DMsans);
+    z-index: 999;
+}
+
+.nav__dropdown--active {
+    display: flex;
+}
+
+.switch__btn {
+    width: 19.8rem;
+    height: 3.9rem;
+    text-align: left;
+    background-color: var(--Neutral-800);
+    border: none;
+    border-radius: 0.8rem;
+    padding: 1rem 0.8rem;
+    color: var(--Neutral-0);
+    font-size: 1.6rem;
+}
+
+.switch__btn:hover {
+    background-color: var(--Neutral-700);
+    border-radius: 0.8rem;
+}
+
+.list__label {
+    font-size: 1.4rem;
+    color: var(--Neutral-300);
+    padding: 0.6rem 0.8rem 0;
+    margin-bottom: 0.8rem;
+    height: 2.3rem;
+    width: 19.8rem;
+}
+
+.line {
+    border-bottom: 1px solid var(--Neutral-600);
+}
+
+.nav__list__item {
+    font-size: 1.6rem;
+    padding: 1rem 0.8rem;
+    margin-bottom: 0.4rem;
+    width: 19.8rem;
+    height: 3.9rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.active__img {
+    width: 1.4rem;
+    height: 1.7rem;
+    display: none;
+}
+
+.nav__list__item--active {
+    background-color: var(--Neutral-700);
+    border-radius: 0.8rem;
+}
+
+.nav__list__item--active > .active__img {
+    display: block;
+}
