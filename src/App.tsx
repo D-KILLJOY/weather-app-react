@@ -2,7 +2,7 @@ import Daily from "./Components/Daily";
 import Header from "./Components/Header";
 import Hourly from "./Components/Hourly";
 import Search from "./Components/Search";
-import WeatherResults from "./Components/WeatherResults";
+import Current from "./Components/Current";
 import axios from "axios";
 
 import { useEffect, useState } from "react";
@@ -176,7 +176,7 @@ function App() {
                 clsSrchFunc={closeSearch}
             />
 
-            <WeatherResults />
+            <Current />
             <Daily />
             <Hourly />
         </main>
