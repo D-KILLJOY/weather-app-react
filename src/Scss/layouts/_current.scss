@@ -1,0 +1,73 @@
+.current__weather__info__con {
+    margin-bottom: 3.2rem;
+}
+
+.current__weather__info {
+    border-radius: 2rem;
+    padding: 4rem 2.4rem;
+    background: url("../../assets/images/bg-today-small.svg") center/cover
+        no-repeat;
+    display: flex;
+    flex-direction: column;
+    gap: 1.6rem;
+    margin-bottom: 2rem;
+    height: 28.6rem;
+}
+
+.locdate__con {
+    font-family: var(--DMsans);
+    text-align: center;
+    color: var(--Neutral-0);
+}
+
+.location {
+    font-size: 2.8rem;
+    margin-bottom: 1.6rem;
+    font-weight: 700;
+}
+
+.date {
+    font-size: 1.8rem;
+    font-weight: 500;
+}
+
+.temp__con {
+    display: flex;
+    justify-content: space-between;
+    text-align: center;
+}
+
+.temperature {
+    font-size: 9.6rem;
+    font-family: var(--DMSansItalic);
+    font-weight: 600;
+    letter-spacing: -0.2rem;
+}
+
+.current__weather__details__con {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1.6rem;
+}
+
+.current__weather__detail {
+    border: 1px solid var(--Neutral-600);
+    background-color: var(--Neutral-800);
+    border-radius: 1.2rem;
+    padding: 2rem;
+    font-family: var(--DMsans);
+    height: 12.1rem;
+}
+
+.current__weather__detail__header {
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: var(--Neutral-200);
+    margin-bottom: 2.4rem;
+}
+
+.current__weather__detail__text {
+    font-size: 3.2rem;
+    font-weight: 300;
+    color: var(--Neutral-0);
+}

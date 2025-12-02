@@ -12,6 +12,13 @@ interface City {
     longitude?: number;
 }
 
+interface CurCty {
+    cords: {
+        lat?: number;
+        lng?: number;
+    };
+}
+
 interface SearchProps {
     srchCurSt: SearchState;
     srchAct: boolean;
@@ -20,6 +27,7 @@ interface SearchProps {
     updtLcFunc: (locName: string) => void;
     srcWthFunc: () => void;
     clsSrchFunc: (city: string) => void;
+    updCurCtyFunc: (cityCords: CurCty) => void;
 }
 
 function Search({
@@ -30,6 +38,7 @@ function Search({
     updtLcFunc,
     srcWthFunc,
     clsSrchFunc,
+    updCurCtyFunc,
 }: SearchProps) {
     return (
         <>
@@ -78,6 +87,12 @@ function Search({
                                             clsSrchFunc(
                                                 `${city.name}, ${city.admin1}, ${city.country}`
                                             );
+                                            updCurCtyFunc({
+                                                cords: {
+                                                    lat: city.latitude,
+                                                    lng: city.longitude,
+                                                },
+                                            });
                                         }}
                                     >
                                         {city.name}, {city.admin1},{" "}
@@ -90,7 +105,7 @@ function Search({
                 )}
                 <button
                     className="search__btn"
-                    type="submit"
+                    type="button"
                     onClick={() => srcWthFunc()}
                 >
                     Search

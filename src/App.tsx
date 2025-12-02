@@ -1,8 +1,6 @@
-import Daily from "./Components/Daily";
+import FullForecast from "./Components/FullForecast";
 import Header from "./Components/Header";
-import Hourly from "./Components/Hourly";
 import Search from "./Components/Search";
-import Current from "./Components/Current";
 import axios from "axios";
 
 import { useEffect, useState } from "react";
@@ -18,6 +16,13 @@ interface City {
     country: string;
     latitude?: number;
     longitude?: number;
+}
+
+interface CurCty {
+    cords: {
+        lat?: number;
+        lng?: number;
+    };
 }
 
 interface WeatherData {
@@ -45,15 +50,19 @@ function App() {
     const [searchActive, setSearchActive] = useState(false);
     const [locValue, setLocValue] = useState<string>("");
     const [searchResults, setSearchResults] = useState<City[]>([]);
-    const [currentCity, setCurrentCity] = useState<City[]>([]);
+    const [currentCity, setCurrentCity] = useState<CurCty[]>([]);
 
     function updateLocation(locName: string) {
         setLocValue(locName);
         setSearchActive(locName.trim() !== "");
     }
 
+    function updateCurCity(cityCords: CurCty) {
+        setCurrentCity([cityCords]);
+    }
+
     function searchWeather() {
-        console.log(searchResults);
+        fetchWeather(currentCity);
     }
 
     function closeSearch(city: string) {
@@ -103,47 +112,72 @@ function App() {
 
     // GET WEATHER DATA
     // GET WEATHER DATA
+    const fetchWeather = async (curCity: CurCty[]) => {
+        if (curCity.length === 0) return;
+        const cityLattitude = curCity[0].cords.lat;
+        const cityLongitude = curCity[0].cords.lat;
+
+        setLoading(true);
+
+        try {
+            const url = "https://api.open-meteo.com/v1/forecast";
+
+            const response = await axios.get<WeatherData>(url, {
+                params: {
+                    latitude: cityLattitude,
+                    longitude: cityLongitude,
+                    hourly: ["temperature_2m", "weather_code"],
+                    daily: [
+                        "temperature_2m_max",
+                        "temperature_2m_min",
+                        "weather_code",
+                    ],
+                    current: [
+                        "temperature_2m",
+                        "precipitation",
+                        "apparent_temperature",
+                        "wind_speed_10m",
+                        "relative_humidity_2m",
+                        "weather_code",
+                    ],
+                    timezone: "auto",
+                },
+            });
+
+            setWeatherData(response.data);
+        } catch (err) {
+            console.error("Weather fetch failed:", err);
+        }
+
+        setLoading(false);
+    };
 
     useEffect(() => {
-        const fetchWeather = async () => {
-            setLoading(true);
+        if (navigator.geolocation) {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    const { latitude, longitude } = position.coords;
+                    setCurrentCity([
+                        { cords: { lat: latitude, lng: longitude } },
+                    ]);
+                },
+                (error) => {
+                    console.error("Geolocation error:", error);
 
-            try {
-                const url = "https://api.open-meteo.com/v1/forecast";
-
-                const response = await axios.get<WeatherData>(url, {
-                    params: {
-                        latitude: 6.6137,
-                        longitude: 3.3553,
-                        hourly: ["temperature_2m", "weather_code"],
-                        daily: [
-                            "temperature_2m_max",
-                            "temperature_2m_min",
-                            "weather_code",
-                        ],
-                        current: [
-                            "temperature_2m",
-                            "precipitation",
-                            "apparent_temperature",
-                            "wind_speed_10m",
-                            "relative_humidity_2m",
-                            "weather_code",
-                        ],
-                        timezone: "auto",
-                    },
-                });
-
-                setWeatherData(response.data);
-            } catch (err) {
-                console.error("Weather fetch failed:", err);
-            }
-
-            setLoading(false);
-        };
-
-        fetchWeather();
+                    // !! ADD ERROR THAT DISPLAYS THAT CURRENT CITY CANT BE DETECTED AND DISPLAY FOR SOMEWHERE ELSE
+                }
+            );
+        } else {
+            console.warn("Geolocation is not supported by this browser.");
+            // !! ADD ERROR THAT DISPLAYS THAT CURRENT CITY CANT BE DETECTED AND DISPLAY FOR SOMEWHERE ELSE
+        }
     }, []);
 
+    useEffect(() => {
+        fetchWeather(currentCity);
+    }, []);
+
+    console.log(currentCity);
     console.log(weatherData);
 
     // GET WEATHER DATA
@@ -174,11 +208,21 @@ function App() {
                 updtLcFunc={updateLocation}
                 srcWthFunc={searchWeather}
                 clsSrchFunc={closeSearch}
+                updCurCtyFunc={updateCurCity}
             />
 
-            <Current />
-            <Daily />
-            <Hourly />
+            <FullForecast />
+            <div className="attribution">
+                Challenge by{" "}
+                <a href="https://www.frontendmentor.io?ref=challenge">
+                    Frontend Mentor
+                </a>
+                . Coded by{" "}
+                <a target="_blank" href="https://linktr.ee/didiauche">
+                    Didia Uchenna
+                </a>
+                .
+            </div>
         </main>
     );
 }
