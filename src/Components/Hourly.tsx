@@ -23,7 +23,7 @@ function Hourly() {
 
             <article className="hourly__forecast">
                 {items.map((_, i) => (
-                    <div className="forecast__con"></div>
+                    <div className="forecast__con" key={i}></div>
                 ))}
             </article>
         </section>

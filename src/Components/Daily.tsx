@@ -6,7 +6,7 @@ function Daily() {
             <h3 className="daily__forecast__header">Daily forecast</h3>
             <article className="daily__forcast">
                 {items.map((_, i) => (
-                    <div className="forecast">
+                    <div className="forecast" key={i}>
                         {/* <p className="forecast__day">Tue</p>
                         <img
                             className="forecast__img"
