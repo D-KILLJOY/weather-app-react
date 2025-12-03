@@ -54,6 +54,8 @@ function App() {
     const [currentCity, setCurrentCity] = useState<CurCty[]>([]);
     const [autoCity, setAutoCity] = useState<CurCty[]>([]);
 
+    const [selectedDay, setSelectedDay] = useState<string>("Wednesday");
+
     function updateLocation(locNameP: string) {
         setLocValue(locNameP);
         setSearchActive(locNameP.trim() !== "");
@@ -66,12 +68,17 @@ function App() {
     function searchWeather() {
         fetchWeather(currentCity);
         setLocName(locValue);
+        setLocValue("");
     }
 
     function closeSearch(city: string) {
         setLocValue(city);
         setSearchActive(false);
         setSearchResults([]);
+    }
+
+    function updateDay(day: string) {
+        setSelectedDay(day);
     }
 
     // GET LOCATION AND LOCATION DATA
@@ -250,6 +257,8 @@ function App() {
                     ldState={loading}
                     locName={locName}
                     forecastData={weatherData}
+                    sltdDay={selectedDay}
+                    tglDayFunc={updateDay}
                 />
             )}
 

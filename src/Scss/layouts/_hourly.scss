@@ -1,7 +1,7 @@
 .hourly__forecast__con {
     border-radius: 2rem;
     display: grid;
-    padding: 2rem 1.6rem;
+    padding-block: 2rem;
     gap: 1.6rem;
     background-color: var(--Neutral-800);
     font-family: var(--DMsans);
@@ -11,6 +11,7 @@
     display: flex;
     justify-content: space-between;
     position: relative;
+    padding-inline: 1.6rem;
 }
 
 .hourly__header {
@@ -78,6 +79,7 @@
     gap: 1.6rem;
     max-height: 68.5rem;
     overflow-y: scroll;
+    padding-inline: 1.6rem;
 
     /* Width of the scrollbar */
     &::-webkit-scrollbar {
@@ -99,7 +101,31 @@
     padding: 1rem 1.6rem 1rem 1.2rem;
     height: 6rem;
     align-items: center;
+    justify-content: space-between;
     gap: 0.8rem;
+}
+
+.icon__time {
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+
+    .hourly__icon {
+        width: 4rem;
+        height: 4rem;
+    }
+
+    .hour__time {
+        font-size: 2rem;
+        font-weight: 500;
+        color: var(--Neutral-0);
+        font-family: var(--DMsans), sans-serif;
+    }
+}
+
+.hour__temp {
+    font-size: 1.6rem;
+    font-weight: 500;
 }
 
 .icon__dropdown {

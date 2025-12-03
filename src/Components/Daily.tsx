@@ -1,34 +1,38 @@
 interface weatherProps {
     dispStat: boolean;
-    // forecastData: any;
+    forecastData: any;
 }
 
-function Daily({ dispStat }: weatherProps) {
+function Daily({ dispStat, forecastData }: weatherProps) {
     const items = [...Array(7)];
 
     return (
         <section className="daily__forecast__con">
             <h3 className="daily__forecast__header">Daily forecast</h3>
             <article className="daily__forcast">
-                {dispStat === true ? (
-                    items.map((_, i) => (
-                        <div className="forecast" key={i}></div>
-                    ))
-                ) : (
-                    <div className="forecast">
-                        <p className="forecast__day">Tue</p>
-                        <img
-                            className="forecast__img"
-                            src="./assets/images/icon-rain.webp"
-                            alt="forecast image"
-                        />
+                {dispStat === true
+                    ? items.map((_, i) => (
+                          <div className="forecast" key={i}></div>
+                      ))
+                    : forecastData.map((data: any) => (
+                          <div className="forecast" key={data.weekDay}>
+                              <p className="forecast__day">{data.weekDay}</p>
+                              <img
+                                  className="forecast__img"
+                                  src={data.WeatherIcon}
+                                  alt="forecast image"
+                              />
 
-                        <div className="forecast__temp">
-                            <p className="first__temp temp__text">20&deg;</p>
-                            <p className="second__temp temp__text">14&deg;</p>
-                        </div>
-                    </div>
-                )}
+                              <div className="forecast__temp">
+                                  <p className="first__temp temp__text">
+                                      {data.maxTemp}°
+                                  </p>
+                                  <p className="second__temp temp__text">
+                                      {data.minTemp}°
+                                  </p>
+                              </div>
+                          </div>
+                      ))}
             </article>
         </section>
     );

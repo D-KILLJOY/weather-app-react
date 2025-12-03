@@ -6,31 +6,44 @@ interface weatherProps {
     ldState: boolean;
     forecastData: any;
     locName: string;
+    sltdDay: string;
+    tglDayFunc: (day: string) => void;
 }
 
-function FullForecast({ ldState, forecastData, locName }: weatherProps) {
+function FullForecast({
+    ldState,
+    forecastData,
+    locName,
+    sltdDay,
+    tglDayFunc,
+}: weatherProps) {
     let currentWeatherData;
     let dailyWeather;
     let hourlyWeather;
 
     function convertCodeToIcon(code: number): string {
-        return code === 0
-            ? "/public/images/icon-sunny.webp"
-            : code === 1 || 2
-              ? "/public/images/icon-partly-cloudy.webp"
-              : code === 3
-                ? "/public/images/icon-overcast.webp"
-                : code === 45 || 48
-                  ? "/public/images/icon-fog.webp"
-                  : code === 51 || 53 || 55 || 56 || 57
-                    ? "/public/images/icon-drizzle.webp"
-                    : code === 61 || 63 || 65 || 66 || 67 || 80 || 81 || 82
-                      ? "/public/images/icon-rain.webp"
-                      : code === 71 || 73 || 75 || 77 || 85 || 86
-                        ? "/public/images/icon-snow.webp"
-                        : code === 95 || 96 || 99
-                          ? "/public/images/icon-storm.webp"
-                          : "/public/images/icon-sunny.webp";
+        if (code === 0) return "/public/images/icon-sunny.webp";
+
+        if ([1, 2].includes(code))
+            return "/public/images/icon-partly-cloudy.webp";
+
+        if (code === 3) return "/public/images/icon-overcast.webp";
+
+        if ([45, 48].includes(code)) return "/public/images/icon-fog.webp";
+
+        if ([51, 53, 55, 56, 57].includes(code))
+            return "/public/images/icon-drizzle.webp";
+
+        if ([61, 63, 65, 66, 67, 80, 81, 82].includes(code))
+            return "/public/images/icon-rain.webp";
+
+        if ([71, 73, 75, 77, 85, 86].includes(code))
+            return "/public/images/icon-snow.webp";
+
+        if ([95, 96, 99].includes(code))
+            return "/public/images/icon-storm.webp";
+
+        return "/public/images/icon-sunny.webp";
     }
 
     function formatDate(dateVal: string): string {
@@ -46,8 +59,25 @@ function FullForecast({ ldState, forecastData, locName }: weatherProps) {
         return date.toLocaleDateString("en-US", options);
     }
 
+    function getShortDay(timeVal: string): string {
+        const date = new Date(timeVal);
+        return date.toLocaleDateString("en-US", { weekday: "short" });
+    }
+
+    function getLongDay(dateStr: string): string {
+        const date = new Date(dateStr);
+        return date.toLocaleDateString("en-US", { weekday: "long" });
+    }
+
+    function formatToAmPm(dateString: string) {
+        const date = new Date(dateString);
+        let hours = date.getHours();
+        const ampm = hours >= 12 ? "PM" : "AM";
+        hours = hours % 12 || 12;
+        return `${hours} ${ampm}`;
+    }
+
     if (forecastData && forecastData.current) {
-        dailyWeather = forecastData.daily;
         hourlyWeather = forecastData.hourly;
 
         currentWeatherData = {
@@ -60,7 +90,30 @@ function FullForecast({ ldState, forecastData, locName }: weatherProps) {
             wind: Math.round(forecastData.current.wind_speed_10m),
             precipitation: Math.round(forecastData.current.precipitation),
         };
+
+        dailyWeather = forecastData.daily.time.map(
+            (timeVal: string, i: number) => ({
+                weekDay: getShortDay(timeVal),
+                minTemp: Math.round(forecastData.daily.temperature_2m_min[i]),
+                maxTemp: Math.round(forecastData.daily.temperature_2m_max[i]),
+                WeatherIcon: convertCodeToIcon(
+                    forecastData.daily.weather_code[i]
+                ),
+            })
+        );
+
+        hourlyWeather = forecastData.hourly.time.map(
+            (timeVal: string, i: number) => ({
+                weekDay: getLongDay(timeVal),
+                time: formatToAmPm(timeVal),
+                temp: Math.round(forecastData.hourly.temperature_2m[i]),
+                weatherIcon: convertCodeToIcon(
+                    forecastData.hourly.weather_code[i]
+                ),
+            })
+        );
     }
+    console.log(hourlyWeather);
     console.log(currentWeatherData);
 
     console.log(forecastData);
@@ -71,8 +124,13 @@ function FullForecast({ ldState, forecastData, locName }: weatherProps) {
     return (
         <section className="weather__content">
             <Current dispStat={ldState} forecastData={currentWeatherData} />
-            <Daily dispStat={ldState} />
-            <Hourly dispStat={ldState} />
+            <Daily dispStat={ldState} forecastData={dailyWeather} />
+            <Hourly
+                dispStat={ldState}
+                forecastData={hourlyWeather}
+                selectedDay={sltdDay}
+                toggleDayFunc={tglDayFunc}
+            />
         </section>
     );
 }
