@@ -49,8 +49,10 @@ function App() {
         useState<SearchState>("searching");
     const [searchActive, setSearchActive] = useState(false);
     const [locValue, setLocValue] = useState<string>("");
+    const [locName, setLocName] = useState<string>("");
     const [searchResults, setSearchResults] = useState<City[]>([]);
     const [currentCity, setCurrentCity] = useState<CurCty[]>([]);
+    const [autoCity, setAutoCity] = useState<CurCty[]>([]);
 
     function updateLocation(locName: string) {
         setLocValue(locName);
@@ -115,7 +117,7 @@ function App() {
     const fetchWeather = async (curCity: CurCty[]) => {
         if (curCity.length === 0) return;
         const cityLattitude = curCity[0].cords.lat;
-        const cityLongitude = curCity[0].cords.lat;
+        const cityLongitude = curCity[0].cords.lng;
 
         setLoading(true);
 
@@ -157,9 +159,8 @@ function App() {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                     const { latitude, longitude } = position.coords;
-                    setCurrentCity([
-                        { cords: { lat: latitude, lng: longitude } },
-                    ]);
+                    console.log(position);
+                    setAutoCity([{ cords: { lat: latitude, lng: longitude } }]);
                 },
                 (error) => {
                     console.error("Geolocation error:", error);
@@ -174,10 +175,38 @@ function App() {
     }, []);
 
     useEffect(() => {
-        fetchWeather(currentCity);
-    }, []);
+        fetchWeather(autoCity);
 
-    console.log(currentCity);
+        const reverseGeocode = async (autoCty: CurCty[]) => {
+            if (autoCty.length === 0) return;
+            const cityLattitude = autoCty[0].cords.lat;
+            const cityLongitude = autoCty[0].cords.lng;
+            try {
+                const response = await axios.get(
+                    "https://nominatim.openstreetmap.org/reverse",
+                    {
+                        params: {
+                            lat: cityLattitude,
+                            lon: cityLongitude,
+                            format: "json",
+                        },
+                    }
+                );
+                const { city, country } = response.data.address;
+                console.log(response.data.address);
+                const newLoc = `${city}, ${country}`;
+                setLocName(newLoc);
+
+                // { city, state, country, postcode, etc. }
+            } catch (err) {
+                console.error(err);
+            }
+        };
+        reverseGeocode(autoCity);
+    }, [autoCity]);
+
+    console.log(autoCity);
+
     console.log(weatherData);
 
     // GET WEATHER DATA
@@ -193,7 +222,7 @@ function App() {
             : setUnitSystem("metric");
     }
     return (
-        <main>
+        <main className="app__body">
             <Header
                 unitTgl={unitToggle}
                 tglUnitFunc={toggleUnit}
@@ -211,7 +240,18 @@ function App() {
                 updCurCtyFunc={updateCurCity}
             />
 
-            <FullForecast />
+            {loading === false && autoCity.length < 1 && locName === "" ? (
+                <div className="no__result">
+                    <p>No search result found!</p>
+                </div>
+            ) : (
+                <FullForecast
+                    ldState={loading}
+                    locName={locName}
+                    forecastData={weatherData}
+                />
+            )}
+
             <div className="attribution">
                 Challenge by{" "}
                 <a href="https://www.frontendmentor.io?ref=challenge">

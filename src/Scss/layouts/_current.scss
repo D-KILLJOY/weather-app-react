@@ -2,6 +2,72 @@
     margin-bottom: 3.2rem;
 }
 
+.curr__loading__con {
+    border-radius: 2rem;
+    padding: 4rem 2.4rem;
+    background-color: hsl(242, 27%, 20%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.6rem;
+    margin-bottom: 2rem;
+    height: 28.6rem;
+    gap: 1.4rem;
+}
+
+.load__circle__con {
+    width: 5.6rem;
+    height: 1.6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.load__circle {
+    width: 1.2rem;
+    height: 1.2rem;
+    border-radius: 50%;
+    background-color: var(--Neutral-0);
+    opacity: 0.8;
+    position: relative;
+    animation: bounce 2s infinite ease-in-out;
+}
+
+.load__rev {
+    top: -0.5rem;
+    animation: revbounce 2s infinite ease-in-out;
+}
+
+@keyframes bounce {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-0.5rem);
+    }
+}
+
+@keyframes revbounce {
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(0.5rem);
+    }
+}
+
+.load__text {
+    font-family: var(--DMsans);
+    line-height: 1.2;
+    font-size: 1.8rem;
+    font-weight: 500;
+    color: var(--Neutral-200);
+}
+
 .current__weather__info {
     border-radius: 2rem;
     padding: 4rem 2.4rem;
@@ -29,6 +95,8 @@
 .date {
     font-size: 1.8rem;
     font-weight: 500;
+    color: var(--Neutral-0);
+    opacity: 0.8;
 }
 
 .temp__con {

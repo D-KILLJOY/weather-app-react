@@ -1,13 +1,22 @@
-function Daily() {
+interface weatherProps {
+    dispStat: boolean;
+    // forecastData: any;
+}
+
+function Daily({ dispStat }: weatherProps) {
     const items = [...Array(7)];
 
     return (
         <section className="daily__forecast__con">
             <h3 className="daily__forecast__header">Daily forecast</h3>
             <article className="daily__forcast">
-                {items.map((_, i) => (
-                    <div className="forecast" key={i}>
-                        {/* <p className="forecast__day">Tue</p>
+                {dispStat === true ? (
+                    items.map((_, i) => (
+                        <div className="forecast" key={i}></div>
+                    ))
+                ) : (
+                    <div className="forecast">
+                        <p className="forecast__day">Tue</p>
                         <img
                             className="forecast__img"
                             src="./assets/images/icon-rain.webp"
@@ -17,9 +26,9 @@ function Daily() {
                         <div className="forecast__temp">
                             <p className="first__temp temp__text">20&deg;</p>
                             <p className="second__temp temp__text">14&deg;</p>
-                        </div> */}
+                        </div>
                     </div>
-                ))}
+                )}
             </article>
         </section>
     );

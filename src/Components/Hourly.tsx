@@ -1,6 +1,10 @@
 import dropdownIcon from "../assets/images/icon-dropdown.svg";
 
-function Hourly() {
+interface weatherProps {
+    dispStat: boolean;
+    // forecastData: any;
+}
+function Hourly({ dispStat }: weatherProps) {
     const items = [...Array(8)];
 
     return (
@@ -22,9 +26,13 @@ function Hourly() {
             </nav>
 
             <article className="hourly__forecast">
-                {items.map((_, i) => (
-                    <div className="forecast__con" key={i}></div>
-                ))}
+                {dispStat === true ? (
+                    items.map((_, i) => (
+                        <div className="forecast__con" key={i}></div>
+                    ))
+                ) : (
+                    <div className="forecast__con"></div>
+                )}
             </article>
         </section>
     );
