@@ -85,7 +85,7 @@ function Search({
                                         key={city.id}
                                         onClick={() => {
                                             clsSrchFunc(
-                                                `${city.name}, ${city.admin1}, ${city.country}`
+                                                `${city.name},  ${city.country}`
                                             );
                                             updCurCtyFunc({
                                                 cords: {

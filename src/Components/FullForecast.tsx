@@ -55,10 +55,10 @@ function FullForecast({ ldState, forecastData, locName }: weatherProps) {
             date: formatDate(forecastData.current.time),
             weatherCode: convertCodeToIcon(forecastData.current.weather_code),
             temperature: Math.round(forecastData.current.temperature_2m),
-            apparentTemp: forecastData.current.apparent_temperature,
-            humidity: forecastData.current.relative_humidity_2m,
-            wind: forecastData.current.wind_speed_10m,
-            precipitation: forecastData.current.precipitation,
+            apparentTemp: Math.round(forecastData.current.apparent_temperature),
+            humidity: Math.round(forecastData.current.relative_humidity_2m),
+            wind: Math.round(forecastData.current.wind_speed_10m),
+            precipitation: Math.round(forecastData.current.precipitation),
         };
     }
     console.log(currentWeatherData);

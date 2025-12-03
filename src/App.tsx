@@ -54,9 +54,9 @@ function App() {
     const [currentCity, setCurrentCity] = useState<CurCty[]>([]);
     const [autoCity, setAutoCity] = useState<CurCty[]>([]);
 
-    function updateLocation(locName: string) {
-        setLocValue(locName);
-        setSearchActive(locName.trim() !== "");
+    function updateLocation(locNameP: string) {
+        setLocValue(locNameP);
+        setSearchActive(locNameP.trim() !== "");
     }
 
     function updateCurCity(cityCords: CurCty) {
@@ -65,6 +65,7 @@ function App() {
 
     function searchWeather() {
         fetchWeather(currentCity);
+        setLocName(locValue);
     }
 
     function closeSearch(city: string) {
