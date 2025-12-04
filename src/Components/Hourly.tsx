@@ -1,3 +1,4 @@
+import { useState } from "react";
 import dropdownIcon from "../assets/images/icon-dropdown.svg";
 
 interface weatherProps {
@@ -13,12 +14,17 @@ function Hourly({
     toggleDayFunc,
 }: weatherProps) {
     const items = [...Array(8)];
-
     if (forecastData === undefined) return;
+
+    const [selectionOpen, setSelection] = useState<boolean>(false);
 
     const filteredDaily = forecastData.filter(
         (item: any) => item.weekDay === selectedDay
     );
+
+    function toggleNav() {
+        setSelection((prev) => !prev);
+    }
 
     console.log(filteredDaily);
 
@@ -26,60 +32,98 @@ function Hourly({
         <section className="hourly__forecast__con">
             <nav className="forecast__nav__con">
                 <h3 className="hourly__header">Hourly forecast</h3>
-                <button className="day__select__btn">
-                    <span className="day__btn__text">-</span>
-                    <img
-                        src={dropdownIcon}
-                        alt="dropdown arrow"
-                        className="icon__dropdown"
-                    />
-                </button>
-                <div className="forecast__nav__dropdown ">
+                {dispStat === true ? (
+                    <button className="day__select__btn" type="button">
+                        <span className="day__btn__text">-</span>
+                        <img
+                            src={dropdownIcon}
+                            alt="dropdown arrow"
+                            className="icon__dropdown"
+                        />
+                    </button>
+                ) : (
+                    <button
+                        className="day__select__btn"
+                        type="button"
+                        onClick={toggleNav}
+                    >
+                        <span className="day__btn__text">{selectedDay}</span>
+                        <img
+                            src={dropdownIcon}
+                            alt="dropdown arrow"
+                            className="icon__dropdown"
+                        />
+                    </button>
+                )}
+                <div
+                    className={`forecast__nav__dropdown ${selectionOpen === true ? "forecast__nav__dropdown--active" : ""}`}
+                >
                     <button
                         className="forecast__nav"
-                        onClick={() => toggleDayFunc("Monday")}
+                        onClick={() => {
+                            toggleDayFunc("Monday");
+                            toggleNav();
+                        }}
                         type="button"
                     >
                         Monday
                     </button>
                     <button
                         className="forecast__nav"
-                        onClick={() => toggleDayFunc("Tuesday")}
+                        onClick={() => {
+                            toggleDayFunc("Tuesday");
+                            toggleNav();
+                        }}
                         type="button"
                     >
                         Tuesday
                     </button>
                     <button
                         className="forecast__nav"
-                        onClick={() => toggleDayFunc("Wednesday")}
+                        onClick={() => {
+                            toggleDayFunc("Wednesday");
+                            toggleNav();
+                        }}
                         type="button"
                     >
                         Wednesday
                     </button>
                     <button
                         className="forecast__nav"
-                        onClick={() => toggleDayFunc("Thursday")}
+                        onClick={() => {
+                            toggleDayFunc("Thursday");
+                            toggleNav();
+                        }}
                         type="button"
                     >
                         Thursday
                     </button>
                     <button
                         className="forecast__nav"
-                        onClick={() => toggleDayFunc("Friday")}
+                        onClick={() => {
+                            toggleDayFunc("Friday");
+                            toggleNav();
+                        }}
                         type="button"
                     >
                         Friday
                     </button>
                     <button
                         className="forecast__nav"
-                        onClick={() => toggleDayFunc("Saturday")}
+                        onClick={() => {
+                            toggleDayFunc("Saturday");
+                            toggleNav();
+                        }}
                         type="button"
                     >
                         Saturday
                     </button>
                     <button
                         className="forecast__nav"
-                        onClick={() => toggleDayFunc("Sunday")}
+                        onClick={() => {
+                            toggleDayFunc("Sunday");
+                            toggleNav();
+                        }}
                         type="button"
                     >
                         Sunday
@@ -102,7 +146,7 @@ function Hourly({
                                   />
                                   <p className="hour__time">{dailyHour.time}</p>
                               </div>
-                              <p className="hour__temp">{dailyHour.temp}°</p>
+                              <p className="hour__temp">{dailyHour.temp}</p>
                           </div>
                       ))}
             </article>

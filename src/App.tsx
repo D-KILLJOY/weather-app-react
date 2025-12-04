@@ -54,7 +54,7 @@ function App() {
     const [currentCity, setCurrentCity] = useState<CurCty[]>([]);
     const [autoCity, setAutoCity] = useState<CurCty[]>([]);
 
-    const [selectedDay, setSelectedDay] = useState<string>("Wednesday");
+    const [selectedDay, setSelectedDay] = useState<string>("");
 
     function updateLocation(locNameP: string) {
         setLocValue(locNameP);
@@ -215,6 +215,18 @@ function App() {
 
     console.log(autoCity);
 
+    function setCurrDay() {
+        if (weatherData === undefined || weatherData === null) return;
+        const date = new Date(weatherData.current.time);
+        const currentDay = date.toLocaleDateString("en-US", {
+            weekday: "long",
+        });
+
+        setSelectedDay(currentDay);
+    }
+
+    useEffect(setCurrDay, [weatherData]);
+
     console.log(weatherData);
 
     // GET WEATHER DATA
@@ -259,6 +271,7 @@ function App() {
                     forecastData={weatherData}
                     sltdDay={selectedDay}
                     tglDayFunc={updateDay}
+                    unitSys={unitSystem}
                 />
             )}
 

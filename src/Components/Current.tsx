@@ -30,7 +30,7 @@ function Current({ dispStat, forecastData }: weatherProps) {
                             className="temp__icon"
                         />
                         <p className="temperature">
-                            {forecastData.temperature}°
+                            {forecastData.temperature}
                         </p>
                     </article>
                 </section>
@@ -41,9 +41,7 @@ function Current({ dispStat, forecastData }: weatherProps) {
                         Feels Like
                     </h3>
                     <p className="current__weather__detail__text feels__like__text">
-                        {dispStat === true
-                            ? "-"
-                            : `${forecastData.apparentTemp}°`}
+                        {dispStat === true ? "-" : forecastData.apparentTemp}
                     </p>
                 </div>
                 <div className="humidity current__weather__detail">
@@ -57,7 +55,7 @@ function Current({ dispStat, forecastData }: weatherProps) {
                 <div className="wind current__weather__detail">
                     <h3 className="current__weather__detail__header">Wind</h3>
                     <p className="current__weather__detail__text wind__text">
-                        {dispStat === true ? "-" : `${forecastData.wind} Km/h`}
+                        {dispStat === true ? "-" : `${forecastData.wind}`}
                     </p>
                 </div>
                 <div className="precipitation current__weather__detail">
@@ -67,7 +65,7 @@ function Current({ dispStat, forecastData }: weatherProps) {
                     <p className="current__weather__detail__text precipitation__text">
                         {dispStat === true
                             ? "-"
-                            : `${forecastData.precipitation} mm`}
+                            : `${forecastData.precipitation} `}
                     </p>
                 </div>
             </section>

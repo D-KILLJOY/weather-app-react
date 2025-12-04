@@ -2,12 +2,15 @@ import Current from "./Current";
 import Daily from "./Daily";
 import Hourly from "./Hourly";
 
+type UnitSystemType = "metric" | "imperial";
+
 interface weatherProps {
     ldState: boolean;
     forecastData: any;
     locName: string;
     sltdDay: string;
     tglDayFunc: (day: string) => void;
+    unitSys: UnitSystemType;
 }
 
 function FullForecast({
@@ -16,6 +19,7 @@ function FullForecast({
     locName,
     sltdDay,
     tglDayFunc,
+    unitSys,
 }: weatherProps) {
     let currentWeatherData;
     let dailyWeather;
@@ -77,6 +81,21 @@ function FullForecast({
         return `${hours} ${ampm}`;
     }
 
+    function convertTemp(temp: number): string {
+        if (unitSys === "metric") return `${temp}°`;
+        return `${Math.round(temp * (9 / 5) + 32)} °`;
+    }
+
+    function convertSpeed(speed: number): string {
+        if (unitSys === "metric") return `${speed} km/h`;
+        return `${Math.round(speed * 0.621371)} mph`;
+    }
+
+    function convertPpt(ppt: number): string {
+        if (unitSys === "metric") return `${ppt} mm`;
+        return `${ppt / 25.4} in`;
+    }
+
     if (forecastData && forecastData.current) {
         hourlyWeather = forecastData.hourly;
 
@@ -84,18 +103,28 @@ function FullForecast({
             location: locName,
             date: formatDate(forecastData.current.time),
             weatherCode: convertCodeToIcon(forecastData.current.weather_code),
-            temperature: Math.round(forecastData.current.temperature_2m),
-            apparentTemp: Math.round(forecastData.current.apparent_temperature),
+            temperature: convertTemp(
+                Math.round(forecastData.current.temperature_2m)
+            ),
+            apparentTemp: convertTemp(
+                Math.round(forecastData.current.apparent_temperature)
+            ),
             humidity: Math.round(forecastData.current.relative_humidity_2m),
-            wind: Math.round(forecastData.current.wind_speed_10m),
-            precipitation: Math.round(forecastData.current.precipitation),
+            wind: convertSpeed(Math.round(forecastData.current.wind_speed_10m)),
+            precipitation: convertPpt(
+                Math.round(forecastData.current.precipitation)
+            ),
         };
 
         dailyWeather = forecastData.daily.time.map(
             (timeVal: string, i: number) => ({
                 weekDay: getShortDay(timeVal),
-                minTemp: Math.round(forecastData.daily.temperature_2m_min[i]),
-                maxTemp: Math.round(forecastData.daily.temperature_2m_max[i]),
+                minTemp: convertTemp(
+                    Math.round(forecastData.daily.temperature_2m_min[i])
+                ),
+                maxTemp: convertTemp(
+                    Math.round(forecastData.daily.temperature_2m_max[i])
+                ),
                 WeatherIcon: convertCodeToIcon(
                     forecastData.daily.weather_code[i]
                 ),
@@ -106,7 +135,9 @@ function FullForecast({
             (timeVal: string, i: number) => ({
                 weekDay: getLongDay(timeVal),
                 time: formatToAmPm(timeVal),
-                temp: Math.round(forecastData.hourly.temperature_2m[i]),
+                temp: convertTemp(
+                    Math.round(forecastData.hourly.temperature_2m[i])
+                ),
                 weatherIcon: convertCodeToIcon(
                     forecastData.hourly.weather_code[i]
                 ),

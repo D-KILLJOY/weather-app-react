@@ -25,10 +25,10 @@ function Daily({ dispStat, forecastData }: weatherProps) {
 
                               <div className="forecast__temp">
                                   <p className="first__temp temp__text">
-                                      {data.maxTemp}°
+                                      {data.maxTemp}
                                   </p>
                                   <p className="second__temp temp__text">
-                                      {data.minTemp}°
+                                      {data.minTemp}
                                   </p>
                               </div>
                           </div>
