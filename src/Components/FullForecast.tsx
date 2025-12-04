@@ -26,28 +26,26 @@ function FullForecast({
     let hourlyWeather;
 
     function convertCodeToIcon(code: number): string {
-        if (code === 0) return "/public/images/icon-sunny.webp";
+        if (code === 0) return "/images/icon-sunny.webp";
 
-        if ([1, 2].includes(code))
-            return "/public/images/icon-partly-cloudy.webp";
+        if ([1, 2].includes(code)) return "/images/icon-partly-cloudy.webp";
 
-        if (code === 3) return "/public/images/icon-overcast.webp";
+        if (code === 3) return "/images/icon-overcast.webp";
 
-        if ([45, 48].includes(code)) return "/public/images/icon-fog.webp";
+        if ([45, 48].includes(code)) return "/images/icon-fog.webp";
 
         if ([51, 53, 55, 56, 57].includes(code))
-            return "/public/images/icon-drizzle.webp";
+            return "/images/icon-drizzle.webp";
 
         if ([61, 63, 65, 66, 67, 80, 81, 82].includes(code))
-            return "/public/images/icon-rain.webp";
+            return "/images/icon-rain.webp";
 
         if ([71, 73, 75, 77, 85, 86].includes(code))
-            return "/public/images/icon-snow.webp";
+            return "/images/icon-snow.webp";
 
-        if ([95, 96, 99].includes(code))
-            return "/public/images/icon-storm.webp";
+        if ([95, 96, 99].includes(code)) return "/images/icon-storm.webp";
 
-        return "/public/images/icon-sunny.webp";
+        return "/images/icon-sunny.webp";
     }
 
     function formatDate(dateVal: string): string {
