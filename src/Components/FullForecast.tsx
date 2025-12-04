@@ -10,7 +10,9 @@ interface weatherProps {
     locName: string;
     sltdDay: string;
     tglDayFunc: (day: string) => void;
-    unitSys: UnitSystemType;
+    tempUnitSys: UnitSystemType;
+    spdUnitSys: UnitSystemType;
+    pptUnitSys: UnitSystemType;
 }
 
 function FullForecast({
@@ -19,7 +21,9 @@ function FullForecast({
     locName,
     sltdDay,
     tglDayFunc,
-    unitSys,
+    tempUnitSys,
+    spdUnitSys,
+    pptUnitSys,
 }: weatherProps) {
     let currentWeatherData;
     let dailyWeather;
@@ -80,17 +84,17 @@ function FullForecast({
     }
 
     function convertTemp(temp: number): string {
-        if (unitSys === "metric") return `${temp}°`;
-        return `${Math.round(temp * (9 / 5) + 32)} °`;
+        if (tempUnitSys === "metric") return `${temp}°`;
+        return `${Math.round(temp * (9 / 5) + 32)}°`;
     }
 
     function convertSpeed(speed: number): string {
-        if (unitSys === "metric") return `${speed} km/h`;
+        if (spdUnitSys === "metric") return `${speed} km/h`;
         return `${Math.round(speed * 0.621371)} mph`;
     }
 
     function convertPpt(ppt: number): string {
-        if (unitSys === "metric") return `${ppt} mm`;
+        if (pptUnitSys === "metric") return `${ppt} mm`;
         return `${ppt / 25.4} in`;
     }
 

@@ -40,6 +40,12 @@ interface WeatherData {
 
 function App() {
     const [unitToggle, setUnitToggle] = useState(false);
+    const [tempUnitSystem, setTempUnitSystem] =
+        useState<UnitSystemType>("metric");
+    const [speedUnitSystem, setSpeedUnitSystem] =
+        useState<UnitSystemType>("metric");
+    const [pptUnitSystem, setPptUnitSystem] =
+        useState<UnitSystemType>("metric");
     const [unitSystem, setUnitSystem] = useState<UnitSystemType>("metric");
 
     const [weatherData, setWeatherData] = useState<any>(null);
@@ -237,9 +243,29 @@ function App() {
     }
 
     function toggleUnitSystem() {
-        unitSystem === "metric"
-            ? setUnitSystem("imperial")
-            : setUnitSystem("metric");
+        if (unitSystem === "metric") {
+            setUnitSystem("imperial");
+            setTempUnitSystem("imperial");
+            setSpeedUnitSystem("imperial");
+            setPptUnitSystem("imperial");
+        } else if (unitSystem === "imperial") {
+            setUnitSystem("metric");
+            setTempUnitSystem("metric");
+            setSpeedUnitSystem("metric");
+            setPptUnitSystem("metric");
+        }
+    }
+
+    function toggleTempUnitSystem(unitType: UnitSystemType) {
+        setTempUnitSystem(unitType);
+    }
+
+    function toggleSppedUnitSystem(unitType: UnitSystemType) {
+        setSpeedUnitSystem(unitType);
+    }
+
+    function togglePptUnitSystem(unitType: UnitSystemType) {
+        setPptUnitSystem(unitType);
     }
     return (
         <main className="app__body">
@@ -248,6 +274,12 @@ function App() {
                 tglUnitFunc={toggleUnit}
                 tglUnitSysFunc={toggleUnitSystem}
                 unitSys={unitSystem}
+                tempUnitSys={tempUnitSystem}
+                spdUnitSys={speedUnitSystem}
+                pptUnitSys={pptUnitSystem}
+                tglTmpFunc={toggleTempUnitSystem}
+                tglSpdFunc={toggleSppedUnitSystem}
+                tglPptFunc={togglePptUnitSystem}
             />
             <Search
                 srchCurSt={searchCurrState}
@@ -271,7 +303,9 @@ function App() {
                     forecastData={weatherData}
                     sltdDay={selectedDay}
                     tglDayFunc={updateDay}
-                    unitSys={unitSystem}
+                    tempUnitSys={tempUnitSystem}
+                    spdUnitSys={speedUnitSystem}
+                    pptUnitSys={pptUnitSystem}
                 />
             )}
 
