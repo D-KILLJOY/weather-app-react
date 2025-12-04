@@ -156,8 +156,10 @@ function FullForecast({
 
     return (
         <section className="weather__content">
-            <Current dispStat={ldState} forecastData={currentWeatherData} />
-            <Daily dispStat={ldState} forecastData={dailyWeather} />
+            <div className="curr__daily__con">
+                <Current dispStat={ldState} forecastData={currentWeatherData} />
+                <Daily dispStat={ldState} forecastData={dailyWeather} />
+            </div>{" "}
             <Hourly
                 dispStat={ldState}
                 forecastData={hourlyWeather}

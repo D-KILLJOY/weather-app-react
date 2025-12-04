@@ -54,7 +54,7 @@ function Search({
                     />
                     <input
                         type="text"
-                        placeholder="Search for a place"
+                        placeholder="Search for a place..."
                         className="search__input"
                         name="location"
                         value={lclVal}

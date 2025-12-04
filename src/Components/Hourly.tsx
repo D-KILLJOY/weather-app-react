@@ -14,13 +14,16 @@ function Hourly({
     toggleDayFunc,
 }: weatherProps) {
     const items = [...Array(8)];
-    if (forecastData === undefined) return;
 
     const [selectionOpen, setSelection] = useState<boolean>(false);
 
-    const filteredDaily = forecastData.filter(
-        (item: any) => item.weekDay === selectedDay
-    );
+    let filteredDaily;
+
+    if (forecastData !== undefined) {
+        filteredDaily = forecastData.filter(
+            (item: any) => item.weekDay === selectedDay
+        );
+    }
 
     function toggleNav() {
         setSelection((prev) => !prev);

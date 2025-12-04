@@ -1,5 +1,9 @@
 .current__weather__info__con {
-    margin-bottom: 3.2rem;
+    margin-block-end: 3.2rem;
+
+    @media (min-width: 75rem) {
+        margin-block-end: 4.8rem;
+    }
 }
 
 .curr__loading__con {
@@ -11,7 +15,7 @@
     justify-content: center;
     align-items: center;
     gap: 1.6rem;
-    margin-bottom: 2rem;
+    margin-block-end: 2rem;
     height: 28.6rem;
     gap: 1.4rem;
 }
@@ -76,19 +80,35 @@
     display: flex;
     flex-direction: column;
     gap: 1.6rem;
-    margin-bottom: 2rem;
+    margin-block-end: 2rem;
     height: 28.6rem;
+
+    @media (min-width: 45rem) {
+        flex-direction: row;
+        align-items: center;
+        justify-content: space-between;
+        background: url("../../assets/images/bg-today-large.svg") center/cover
+            no-repeat;
+    }
+
+    @media (min-width: 75rem) {
+        margin-block-end: 3.2rem;
+    }
 }
 
 .locdate__con {
     font-family: var(--DMsans);
     text-align: center;
     color: var(--Neutral-0);
+
+    @media (min-width: 45rem) {
+        text-align: left;
+    }
 }
 
 .location {
     font-size: 2.8rem;
-    margin-bottom: 1.6rem;
+    margin-block-end: 1.6rem;
     font-weight: 700;
 }
 
@@ -103,6 +123,10 @@
     display: flex;
     justify-content: space-between;
     text-align: center;
+
+    @media (min-width: 45rem) {
+        gap: 2rem;
+    }
 }
 
 .temperature {
@@ -116,6 +140,10 @@
     display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 1.6rem;
+
+    @media (min-width: 45rem) {
+        grid-template-columns: repeat(4, 1fr);
+    }
 }
 
 .current__weather__detail {
@@ -131,11 +159,15 @@
     font-size: 1.8rem;
     font-weight: 500;
     color: var(--Neutral-200);
-    margin-bottom: 2.4rem;
+    margin-block-end: 2.4rem;
 }
 
 .current__weather__detail__text {
     font-size: 3.2rem;
     font-weight: 300;
     color: var(--Neutral-0);
+}
+
+.curr__daily__con {
+    width: 100%;
 }

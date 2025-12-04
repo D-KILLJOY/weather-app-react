@@ -5,6 +5,17 @@
     gap: 1.6rem;
     background-color: var(--Neutral-800);
     font-family: var(--DMsans);
+    max-height: 68.5rem;
+
+    @media (min-width: 45rem) {
+        padding-block: 2.4rem;
+    }
+
+    @media (min-width: 75rem) {
+        width: 100%;
+        max-width: 38.4rem;
+        max-height: 69.3rem;
+    }
 }
 
 .forecast__nav__con {
@@ -12,6 +23,10 @@
     justify-content: space-between;
     position: relative;
     padding-inline: 1.6rem;
+
+    @media (min-width: 45rem) {
+        padding-inline: 2.4rem;
+    }
 }
 
 .hourly__header {
@@ -77,11 +92,11 @@
 .hourly__forecast {
     display: grid;
     gap: 1.6rem;
-    max-height: 68.5rem;
-    overflow-y: scroll;
     padding-inline: 1.6rem;
+    padding-block-end: 2rem;
+    overflow-y: scroll;
+    height: 59.2rem;
 
-    /* Width of the scrollbar */
     &::-webkit-scrollbar {
         width: 4px;
     }
@@ -90,6 +105,11 @@
     &::-webkit-scrollbar-thumb {
         border-radius: 2px;
         border: 1px solid var(--Neutral-600);
+    }
+
+    @media (min-width: 45rem) {
+        padding-inline: 2.4rem;
+        padding-block-end: 2.4rem;
     }
 }
 
