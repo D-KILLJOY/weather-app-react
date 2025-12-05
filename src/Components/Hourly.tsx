@@ -29,8 +29,6 @@ function Hourly({
         setSelection((prev) => !prev);
     }
 
-    console.log(filteredDaily);
-
     return (
         <section className="hourly__forecast__con">
             <nav className="forecast__nav__con">

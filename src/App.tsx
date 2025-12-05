@@ -175,13 +175,14 @@ function App() {
             navigator.geolocation.getCurrentPosition(
                 (position) => {
                     const { latitude, longitude } = position.coords;
-                    console.log(position);
                     setAutoCity([{ cords: { lat: latitude, lng: longitude } }]);
                 },
                 (error) => {
                     console.error("Geolocation error:", error);
 
                     // !! ADD ERROR THAT DISPLAYS THAT CURRENT CITY CANT BE DETECTED AND DISPLAY FOR SOMEWHERE ELSE
+
+                    // !! FIX LOCATION NOT DISPLAYING NAME
                 }
             );
         } else {
@@ -209,7 +210,6 @@ function App() {
                     }
                 );
                 const { city, country } = response.data.address;
-                console.log(response.data.address);
                 const newLoc = `${city}, ${country}`;
                 setLocName(newLoc);
 
@@ -220,8 +220,6 @@ function App() {
         };
         reverseGeocode(autoCity);
     }, [autoCity]);
-
-    console.log(autoCity);
 
     function setCurrDay() {
         if (weatherData === undefined || weatherData === null) return;
@@ -234,8 +232,6 @@ function App() {
     }
 
     useEffect(setCurrDay, [weatherData]);
-
-    console.log(weatherData);
 
     // GET WEATHER DATA
     // GET WEATHER DATA

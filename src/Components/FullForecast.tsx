@@ -146,13 +146,6 @@ function FullForecast({
             })
         );
     }
-    console.log(hourlyWeather);
-    console.log(currentWeatherData);
-
-    console.log(forecastData);
-
-    console.log(dailyWeather);
-    console.log(hourlyWeather);
 
     return (
         <section className="weather__content">
