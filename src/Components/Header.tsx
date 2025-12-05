@@ -64,10 +64,10 @@ function Header({
                             ? "Switch to Imperial"
                             : "Switch to Metric"
                     }`}</li>
-                    <div className="tsp__contaioner temp">
+                    <li className="tsp__contaioner temp">
                         <p className="list__label">Temperature</p>
 
-                        <li
+                        <p
                             onClick={() => tglTmpFunc("metric")}
                             className={`nav__list__item ${
                                 tempUnitSys === "metric"
@@ -81,9 +81,9 @@ function Header({
                                 alt="checkmark icon"
                                 className="active__img"
                             />
-                        </li>
+                        </p>
 
-                        <li
+                        <p
                             onClick={() => tglTmpFunc("imperial")}
                             className={`nav__list__item ${
                                 tempUnitSys === "imperial"
@@ -97,12 +97,12 @@ function Header({
                                 alt="checkmark icon"
                                 className="active__img"
                             />
-                        </li>
-                    </div>
-                    <div className="line"></div>
-                    <div className="tsp__contaioner speed">
+                        </p>
+                    </li>
+                    <li className="line"></li>
+                    <li className="tsp__contaioner speed">
                         <p className="list__label">Wind Speed</p>
-                        <li
+                        <p
                             onClick={() => tglSpdFunc("metric")}
                             className={`nav__list__item ${
                                 spdUnitSys === "metric"
@@ -116,8 +116,8 @@ function Header({
                                 alt="checkmark icon"
                                 className="active__img"
                             />
-                        </li>
-                        <li
+                        </p>
+                        <p
                             onClick={() => tglSpdFunc("imperial")}
                             className={`nav__list__item ${
                                 spdUnitSys === "imperial"
@@ -131,12 +131,12 @@ function Header({
                                 alt="checkmark icon"
                                 className="active__img"
                             />
-                        </li>
-                    </div>
-                    <div className="line"></div>
-                    <div className="tsp__contaioner ppt">
+                        </p>
+                    </li>
+                    <li className="line"></li>
+                    <li className="tsp__contaioner ppt">
                         <p className="list__label">Precipitation</p>
-                        <li
+                        <p
                             onClick={() => tglPptFunc("metric")}
                             className={`nav__list__item ${
                                 pptUnitSys === "metric"
@@ -150,8 +150,8 @@ function Header({
                                 alt="checkmark icon"
                                 className="active__img"
                             />
-                        </li>
-                        <li
+                        </p>
+                        <p
                             onClick={() => tglPptFunc("imperial")}
                             className={`nav__list__item ${
                                 pptUnitSys === "imperial"
@@ -165,8 +165,8 @@ function Header({
                                 alt="checkmark icon"
                                 className="active__img"
                             />
-                        </li>
-                    </div>
+                        </p>
+                    </li>
                 </ul>
             </nav>
         </header>

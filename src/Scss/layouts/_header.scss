@@ -117,19 +117,19 @@
     font-size: 1.4rem;
     color: var(--Neutral-300);
     padding: 0.6rem 0.8rem 0;
-    margin-bottom: 0.8rem;
+    margin-block-end: 0.8rem;
     height: 2.3rem;
     width: 19.8rem;
 }
 
 .line {
-    border-bottom: 1px solid var(--Neutral-600);
+    border-block-end: 1px solid var(--Neutral-600);
 }
 
 .nav__list__item {
     font-size: 1.6rem;
     padding: 1rem 0.8rem;
-    margin-bottom: 0.4rem;
+    margin-block-end: 0.4rem;
     width: 19.8rem;
     height: 3.9rem;
     display: flex;

@@ -8,7 +8,7 @@ function Daily({ dispStat, forecastData }: weatherProps) {
 
     return (
         <section className="daily__forecast__con">
-            <h3 className="daily__forecast__header">Daily forecast</h3>
+            <h2 className="daily__forecast__header">Daily forecast</h2>
             <article className="daily__forcast">
                 {dispStat === true
                     ? items.map((_, i) => (

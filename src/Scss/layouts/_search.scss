@@ -114,6 +114,11 @@
     width: 1.6rem;
     height: 1.9rem;
     animation: loaderspin 1.5s linear infinite;
+
+    @media (prefers-reduced-motion: reduce) {
+        animation: none;
+        transform: none;
+    }
 }
 
 @keyframes loaderspin {
