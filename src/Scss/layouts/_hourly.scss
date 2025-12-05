@@ -98,12 +98,12 @@
     height: 59.2rem;
 
     &::-webkit-scrollbar {
-        width: 4px;
+        width: 0.4rem;
     }
 
     /* Scrollbar thumb (the draggable part) */
     &::-webkit-scrollbar-thumb {
-        border-radius: 2px;
+        border-radius: 0.2rem;
         border: 1px solid var(--Neutral-600);
     }
 

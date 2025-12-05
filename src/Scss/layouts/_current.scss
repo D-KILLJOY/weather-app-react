@@ -14,7 +14,6 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 1.6rem;
     margin-block-end: 2rem;
     height: 28.6rem;
     gap: 1.4rem;
@@ -37,11 +36,21 @@
     opacity: 0.8;
     position: relative;
     animation: bounce 2s infinite ease-in-out;
+
+    @media (prefers-reduced-motion: reduce) {
+        animation: none;
+        transform: none;
+    }
 }
 
 .load__rev {
     top: -0.5rem;
     animation: revbounce 2s infinite ease-in-out;
+
+    @media (prefers-reduced-motion: reduce) {
+        animation: none;
+        transform: none;
+    }
 }
 
 @keyframes bounce {

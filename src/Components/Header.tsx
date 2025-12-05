@@ -32,7 +32,7 @@ function Header({
 }: HeaderProps) {
     return (
         <header className="main__header">
-            <nav className="main__nav">
+            <nav className="main__nav" aria-label="Header Navigation">
                 <img className="main__logo" src={logo} alt="Weather Now Logo" />
 
                 <button
@@ -59,15 +59,11 @@ function Header({
                         unitTgl === true ? "nav__dropdown--active" : ""
                     } `}
                 >
-                    <button
-                        type="button"
-                        className="switch__btn"
-                        onClick={tglUnitSysFunc}
-                    >{`${
+                    <li className="switch__btn" onClick={tglUnitSysFunc}>{`${
                         unitSys === "metric"
                             ? "Switch to Imperial"
                             : "Switch to Metric"
-                    }`}</button>
+                    }`}</li>
                     <div className="tsp__contaioner temp">
                         <p className="list__label">Temperature</p>
 

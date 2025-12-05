@@ -18,7 +18,7 @@ function Current({ dispStat, forecastData }: weatherProps) {
             ) : (
                 <section className="current__weather__info">
                     <article className="locdate__con">
-                        <h2 className="location">{forecastData.location}</h2>
+                        <p className="location">{forecastData.location}</p>
                         <p className="date">{forecastData.date}</p>
                     </article>
                     <article className="temp__con">
@@ -37,31 +37,29 @@ function Current({ dispStat, forecastData }: weatherProps) {
             )}
             <section className="current__weather__details__con">
                 <div className="feels__like current__weather__detail">
-                    <h3 className="current__weather__detail__header">
+                    <p className="current__weather__detail__header">
                         Feels Like
-                    </h3>
+                    </p>
                     <p className="current__weather__detail__text feels__like__text">
                         {dispStat === true ? "-" : forecastData.apparentTemp}
                     </p>
                 </div>
                 <div className="humidity current__weather__detail">
-                    <h3 className="current__weather__detail__header">
-                        Humidity
-                    </h3>
+                    <p className="current__weather__detail__header">Humidity</p>
                     <p className="current__weather__detail__text humidity__text">
                         {dispStat === true ? "-" : `${forecastData.humidity}%`}
                     </p>
                 </div>
                 <div className="wind current__weather__detail">
-                    <h3 className="current__weather__detail__header">Wind</h3>
+                    <p className="current__weather__detail__header">Wind</p>
                     <p className="current__weather__detail__text wind__text">
                         {dispStat === true ? "-" : `${forecastData.wind}`}
                     </p>
                 </div>
                 <div className="precipitation current__weather__detail">
-                    <h3 className="current__weather__detail__header">
+                    <p className="current__weather__detail__header">
                         Precipitation
-                    </h3>
+                    </p>
                     <p className="current__weather__detail__text precipitation__text">
                         {dispStat === true
                             ? "-"

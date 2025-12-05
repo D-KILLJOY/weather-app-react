@@ -25,7 +25,7 @@ interface SearchProps {
     lclVal: string;
     srchRslts: City[];
     updtLcFunc: (locName: string) => void;
-    srcWthFunc: () => void;
+    srcWthFunc: (e: React.MouseEvent<HTMLButtonElement>) => void;
     clsSrchFunc: (city: string) => void;
     updCurCtyFunc: (cityCords: CurCty) => void;
 }
@@ -105,8 +105,8 @@ function Search({
                 )}
                 <button
                     className="search__btn"
-                    type="button"
-                    onClick={() => srcWthFunc()}
+                    type="submit"
+                    onClick={srcWthFunc}
                 >
                     Search
                 </button>

@@ -71,7 +71,9 @@ function App() {
         setCurrentCity([cityCords]);
     }
 
-    function searchWeather() {
+    function searchWeather(e: React.MouseEvent<HTMLButtonElement>) {
+        e.preventDefault();
+
         fetchWeather(currentCity);
         setLocName(locValue);
         setLocValue("");
